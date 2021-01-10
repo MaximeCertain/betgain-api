@@ -1,0 +1,64 @@
+version: '3'
+#https://www.baeldung.com/spring-boot-postgresql-docker
+services:
+
+  app_api_betgain:
+    image: 'docker-spring-boot-postgres:latest'
+    build:
+      context: .
+    container_name: app_api_betgain
+    ports:
+      - "11111:8080"
+    depends_on:
+      - db_api_betgain
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_api_betgain:5432/betgain #jdbc:postgresql://host:port/database
+      - SPRING_DATASOURCE_USERNAME=betgain
+      - SPRING_DATASOURCE_PASSWORD=betgain
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - PORT=8081
+    networks:
+      - postgres
+
+  db_api_betgain:
+    image: 'postgres:12-alpine'
+    container_name: db_api_betgain
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: betgain
+      POSTGRES_USER: betgain
+      POSTGRES_DB: betgain
+      POSTGRES_HOST_AUTH_METHOD: trust # allow all connections without a password. This is *not* recommended for prod
+    volumes:
+      - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+    ports:
+      - "6001:5432"
+    networks:
+      - postgres
+
+  pgadmin_api_betgain:
+    image: dpage/pgadmin4
+    container_name: pgadmin_api_betgain
+    environment:
+      PGADMIN_DEFAULT_EMAIL: toto@hitweb.fr
+      PGADMIN_DEFAULT_PASSWORD: hitweb
+    ports:
+      - "5050:80"
+    restart: always
+    volumes:
+      - pgadmin:/root/.pgadmin
+    links:
+      - db_api_betgain:pgsql-server
+    tty: true
+    depends_on:
+      - db_api_betgain
+    networks:
+      - postgres
+
+volumes:
+  database-data:
+  pgadmin:
+
+networks:
+  postgres:
+    driver: bridge
