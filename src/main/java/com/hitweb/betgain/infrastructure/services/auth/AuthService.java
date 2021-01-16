@@ -12,6 +12,7 @@ import com.hitweb.betgain.infrastructure.services.auth.payload.response.MessageR
 import com.hitweb.betgain.infrastructure.services.auth.security.jwt.JwtUtils;
 import com.hitweb.betgain.infrastructure.services.auth.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,6 +39,7 @@ public class AuthService implements AuthInterface {
     @Autowired
     JpaRoleRepository roleRepository;
 
+    @Qualifier("passwordEncoder")
     @Autowired
     PasswordEncoder encoder;
 

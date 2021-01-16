@@ -15,10 +15,14 @@ public class UserAdapter {
         UserEntity userEntity = new UserEntity();
 
         userEntity.setEmail(user.getEmail());
-        userEntity.setFirstname(user.getFirstName());
-        userEntity.setLastname(user.getLastName());
+        userEntity.setFirstname(user.getFirstname());
+        userEntity.setLastname(user.getLastname());
         userEntity.setPassword(user.getPassword());
         userEntity.setUsername(user.getUsername());
+        if (user.getRoles().size() > 0) {
+            Set<RoleEntity> roleEntitySet = user.getRoles().stream().map(role -> RoleAdapter.adapt(role)).collect(Collectors.toSet());
+            userEntity.setRoles(roleEntitySet);
+        }
 
         return userEntity;
 
@@ -29,13 +33,13 @@ public class UserAdapter {
         User user = new User();
         user.setId(userEntity.getId());
         user.setEmail(userEntity.getEmail());
-        user.setFirstName(userEntity.getFirstname());
-        user.setLastName(userEntity.getLastname());
+        user.setFirstname(userEntity.getFirstname());
+        user.setLastname(userEntity.getLastname());
         user.setPassword(userEntity.getPassword());
         user.setUsername(userEntity.getUsername());
 
-        if(userEntity.getRoles().size() > 0){
-            Set<Role> roleEntitySet =  userEntity.getRoles().stream().map(role -> RoleAdapter.reverse(role)).collect(Collectors.toSet());
+        if (userEntity.getRoles().size() > 0) {
+            Set<Role> roleEntitySet = userEntity.getRoles().stream().map(role -> RoleAdapter.reverse(role)).collect(Collectors.toSet());
             user.setRoles(roleEntitySet);
         }
 

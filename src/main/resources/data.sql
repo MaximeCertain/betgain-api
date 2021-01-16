@@ -12,3 +12,5 @@ INSERT INTO user_role(user_id, role_id) VALUES
 (1,3),
 (2,2),
 (3,1) ON CONFLICT DO NOTHING;
+
+SELECT setval('user_user_id_seq', (SELECT MAX(user_id) FROM public.user)+1);

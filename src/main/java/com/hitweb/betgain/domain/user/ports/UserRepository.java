@@ -1,9 +1,9 @@
-package com.hitweb.betgain.domain.user.repository;
+package com.hitweb.betgain.domain.user.ports;
 
 import com.hitweb.betgain.domain.user.model.User;
 
 //https://reflectoring.io/spring-hexagonal/
 public interface UserRepository {
-    void save(User user);
+    User save(User user);
     public Iterable<User> findAll();
 }

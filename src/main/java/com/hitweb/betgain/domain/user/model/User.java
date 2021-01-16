@@ -8,8 +8,8 @@ import java.util.Set;
 public class User {
 
     private long id;
-    private String firstName;
-    private String lastName;
+    private String firstname;
+    private String lastname;
     private String email;
     private String username;
     private String password;
@@ -24,20 +24,20 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -66,6 +66,10 @@ public class User {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    public void addRole(Role role) {
+        this.roles.add(role);
     }
 
     public void setRoles(Set<Role> roles) {

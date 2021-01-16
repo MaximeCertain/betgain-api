@@ -9,7 +9,14 @@ import java.util.stream.Collectors;
 
 public class RoleAdapter {
 
+    public static RoleEntity adapt(Role role) {
 
+        RoleEntity roleEntity = new RoleEntity();
+        roleEntity.setId(role.getId());
+        roleEntity.setName(role.getName());
+
+        return roleEntity;
+    }
 
     public static Role reverse(RoleEntity roleEntity) {
 
