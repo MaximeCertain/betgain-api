@@ -1,0 +1,12 @@
+#Start from maven docker image
+FROM maven:3.6.3-openjdk-11
+
+#Copy all sources
+COPY . .
+
+#Build ( because you want to execute tests after the spring boot application is started you should disable test during build phase )
+RUN mvn clean package -DskipTests
+#Start container
+COPY src/main/docker/commands.sh /scripts/commands.sh
+RUN ["chmod", "+x", "/scripts/commands.sh"]
+ENTRYPOINT ["/scripts/commands.sh"]

@@ -20,6 +20,25 @@ services:
     networks:
       - postgres
 
+  tests:
+    build:
+      context:  ../../../
+      dockerfile: src/main/docker/Dockerfiletest
+    container_name: tests
+    ports:
+      - "11112:11112"
+    depends_on:
+      - db_api_betgain
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_api_betgain:5432/betgain #jdbc:postgresql://host:port/database
+      - SPRING_DATASOURCE_USERNAME=betgain
+      - SPRING_DATASOURCE_PASSWORD=betgain
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - PORT=8081
+    networks:
+      - postgres
+
+
   db_api_betgain:
     image: 'postgres:12-alpine'
     container_name: db_api_betgain
@@ -54,6 +73,7 @@ services:
       - db_api_betgain
     networks:
       - postgres
+
 
 volumes:
   database-data:
