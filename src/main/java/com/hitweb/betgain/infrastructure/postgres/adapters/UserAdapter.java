@@ -13,7 +13,7 @@ public class UserAdapter {
     public static UserEntity adapt(User user) {
 
         UserEntity userEntity = new UserEntity();
-
+        userEntity.setId(user.getId());
         userEntity.setEmail(user.getEmail());
         userEntity.setFirstname(user.getFirstname());
         userEntity.setLastname(user.getLastname());

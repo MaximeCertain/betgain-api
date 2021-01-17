@@ -11,16 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collection;
 
 
 @RestController
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService userService;
@@ -46,6 +44,12 @@ public class UserController {
     @PostMapping("users")
     public UserResponse saveUser(@Valid @RequestBody UserRequest userRequest) {
         return userService.saveUser(userRequest);
+    }
+
+    @PutMapping("users/{id}")
+    public UserResponse editUser(@PathVariable("id") int id, @Valid @RequestBody UserRequest userRequest) {
+        userRequest.setId(id);
+        return userService.editUser(userRequest);
     }
 
     @GetMapping("hello")

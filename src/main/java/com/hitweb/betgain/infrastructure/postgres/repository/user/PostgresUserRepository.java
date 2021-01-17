@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -24,8 +25,8 @@ public class PostgresUserRepository implements UserRepository {
     @Override
     public User save(User user) {
         UserEntity userEntityJpa = UserAdapter.adapt(user);
+        System.out.println(userEntityJpa.getId());
         UserEntity newUser = jpaUserRepository.save(userEntityJpa);
-
         return UserAdapter.reverse(newUser);
     }
 
@@ -33,5 +34,13 @@ public class PostgresUserRepository implements UserRepository {
     public Iterable<User> findAll() {
         List<User> users = jpaUserRepository.findAll().stream().map(user -> UserAdapter.reverse(user)).collect(Collectors.toList());
         return users;
+    }
+
+    @Override
+    public User findUser(long id) {
+        if((new Long(id)) == null) return null;
+
+        UserEntity userEntity = jpaUserRepository.findById(id);
+        return UserAdapter.reverse(userEntity);
     }
 }

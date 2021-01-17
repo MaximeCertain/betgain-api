@@ -32,7 +32,6 @@ public class AddUserUseCase {
             userResponse.setMessage("La création est impossible, données manquantes");
             return userResponse;
         }
-        System.out.println(user.getRoles().size());
 
         if (user.getRoles().size() == 0) {
             Role role = new Role();
@@ -40,12 +39,9 @@ public class AddUserUseCase {
             role.setId(1);
             user.addRole(role);
         }
-        System.out.println(user.getPassword());
 
         user.setPassword(passwordEncoder.encodePassword(user.getPassword()));
-        System.out.println(user.getPassword());
         User newUser = userRepository.save(user);
-        System.out.println(newUser.getPassword());
 
         userResponse.setUser(newUser);
         userResponse.setMessage("Création de l'utilisateur " + newUser.getUsername() + " réussie");

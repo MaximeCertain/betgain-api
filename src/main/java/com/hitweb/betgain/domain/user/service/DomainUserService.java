@@ -2,6 +2,7 @@ package com.hitweb.betgain.domain.user.service;
 
 import com.hitweb.betgain.domain.user.model.User;
 import com.hitweb.betgain.domain.user.ports.PasswordEncoderInterface;
+import com.hitweb.betgain.domain.user.usecases.EditUserUseCase;
 import com.hitweb.betgain.domain.user.usecases.payload.request.UserRequest;
 import com.hitweb.betgain.domain.user.usecases.payload.response.UserResponse;
 import com.hitweb.betgain.domain.user.ports.UserRepository;
@@ -25,7 +26,14 @@ public class DomainUserService implements UserService {
     }
 
     @Override
+    public UserResponse editUser(UserRequest userRequest) {
+        return new EditUserUseCase(userRepository, passwordEncoderInterface).edit(userRequest);
+    }
+
+    @Override
     public Iterable<User> findAll() {
         return userRepository.findAll();
     }
+
+
 }

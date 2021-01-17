@@ -7,5 +7,6 @@ import com.hitweb.betgain.domain.user.usecases.payload.response.UserResponse;
 
 public interface UserService {
     public UserResponse saveUser(UserRequest user);
+    public UserResponse editUser(UserRequest user);
     public Iterable<User> findAll();
 }
