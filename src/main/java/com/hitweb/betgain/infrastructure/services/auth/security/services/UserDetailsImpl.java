@@ -2,6 +2,7 @@ package com.hitweb.betgain.infrastructure.services.auth.security.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hitweb.betgain.domain.user.model.User;
+import com.hitweb.betgain.infrastructure.postgres.entities.RoleEntity;
 import com.hitweb.betgain.infrastructure.postgres.entities.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -44,9 +45,11 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public static UserDetailsImpl build(UserEntity user) {
+
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
+
             //forme l'objet et le retourne
         return new UserDetailsImpl(
                 user.getId(),

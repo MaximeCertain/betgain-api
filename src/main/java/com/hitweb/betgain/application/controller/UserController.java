@@ -1,17 +1,23 @@
 package com.hitweb.betgain.application.controller;
 
+import com.hitweb.betgain.domain.user.model.ERole;
+import com.hitweb.betgain.domain.user.model.Role;
 import com.hitweb.betgain.domain.user.model.User;
 import com.hitweb.betgain.domain.user.usecases.payload.request.UserRequest;
 import com.hitweb.betgain.domain.user.usecases.payload.response.UserResponse;
 import com.hitweb.betgain.domain.user.service.UserService;
+import com.hitweb.betgain.infrastructure.services.auth.security.WebSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Collection;
 
 
 @RestController
@@ -26,6 +32,14 @@ public class UserController {
 
     @GetMapping("users")
     public Iterable<User> getAllUsers() {
+        /*User currentUser = WebSecurityConfig.getUser();
+        for (Role role : currentUser.getRoles()){
+            System.out.println(role.getName());
+        }
+        System.out.println(currentUser.hasRole(ERole.ROLE_ADMINISTRATOR));
+        System.out.println(currentUser.hasRole(ERole.ROLE_OPERATOR));
+        System.out.println(currentUser.hasRole(ERole.ROLE_USER));*/
+
         return userService.findAll();
     }
 

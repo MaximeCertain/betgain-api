@@ -75,4 +75,11 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public boolean hasRole(ERole eRole) {
+        for (Role role : this.roles) {
+            if (eRole == role.getName()) return true;
+        }
+        return false;
+    }
 }
