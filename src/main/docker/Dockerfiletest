@@ -9,4 +9,4 @@ RUN mvn clean package -DskipTests
 #Start container
 COPY src/main/docker/commands.sh /scripts/commands.sh
 RUN ["chmod", "+x", "/scripts/commands.sh"]
-ENTRYPOINT ["/scripts/commands.sh"]
+ENTRYPOINT ["/scripts/commands_tests.sh"]

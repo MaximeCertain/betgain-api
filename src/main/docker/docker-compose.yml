@@ -5,7 +5,8 @@ services:
   app_api_betgain:
     image: 'docker-spring-boot-postgres:latest'
     build:
-      context: .
+      context: ../../../
+      dockerfile: src/main/docker/Dockerfile
     container_name: app_api_betgain
     ports:
       - "11111:8080"
