@@ -7,7 +7,7 @@ variables:
 stages:
   - prepare
   - build
-  - test
+ # - test
  # - deploy
 
 update:
@@ -22,13 +22,13 @@ update:
 building:
   stage: build
   script:
-    - ls
-    - make install
+    - cd src/main/docker
+    - docker-compose up -d --scale app_api_betgain=0
 
-testing:
-  stage: test
-  script:
-    - make tests
+#testing:
+  #stage: test
+ # script:
+  #  - make tests
 
 #staging:
 #  type: deploy
