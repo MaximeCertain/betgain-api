@@ -1,0 +1,32 @@
+image: maven:latest
+
+variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+stages:
+  - build
+  - test
+ # - deploy
+
+building:
+  stage: build
+  script:
+    - ls
+    - make install
+
+testing:
+  stage: test
+  script:
+    - make tests
+
+#staging:
+#  type: deploy
+#  stage: deploy
+#  image: ruby:latest
+ # script:
+ #   - apt-get update -yq
+  #  - apt-get install -y ruby-dev
+   # - gem install dpl
+    # - apt-get install -yqq ruby ruby-dev nodejs --silent
+   # - dpl --provider=heroku --app=aqueous-savannah-31805 --api-key=$HEROKU_STAGING_API_KEY

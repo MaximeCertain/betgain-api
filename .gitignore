@@ -30,7 +30,7 @@ build/
 !**/src/test/**/build/
 
 !**/src/test/java/com/hitweb/betgain/domain/*
-
+!**/src/main/docker/betgain-0.0.1-SNAPSHOT.jar
 ### VS Code ###
 .vscode/
 .idea/

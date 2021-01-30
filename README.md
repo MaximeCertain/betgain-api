@@ -6,7 +6,7 @@
 | Spring Boot | 
 | PostgresSQL     | 
 | Docker     | 
-| Travis     | 
+| Gitlab-CI     | 
 
 
 <h1>Installation</h1>
