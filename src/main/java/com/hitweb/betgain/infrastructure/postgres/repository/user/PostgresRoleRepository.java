@@ -24,4 +24,5 @@ public class PostgresRoleRepository implements RoleRepository {
         List<Role> roles = jpaRoleRepository.findAll().stream().map(role -> RoleAdapter.reverse(role)).collect(Collectors.toList());
         return roles;
     }
+
 }

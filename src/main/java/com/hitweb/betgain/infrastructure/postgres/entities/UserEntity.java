@@ -33,6 +33,9 @@ public class UserEntity {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "confirmation_code", nullable = true)
+    private String confirmationCode;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
@@ -94,5 +97,13 @@ public class UserEntity {
 
     public void setRoles(Set<RoleEntity> roles) {
         this.roles = roles;
+    }
+
+    public String getConfirmationCode() {
+        return confirmationCode;
+    }
+
+    public void setConfirmationCode(String confirmationCode) {
+        this.confirmationCode = confirmationCode;
     }
 }

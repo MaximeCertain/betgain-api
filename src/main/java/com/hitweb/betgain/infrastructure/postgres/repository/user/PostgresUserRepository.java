@@ -4,6 +4,7 @@ import com.hitweb.betgain.domain.user.model.User;
 import com.hitweb.betgain.domain.user.ports.UserRepository;
 import com.hitweb.betgain.infrastructure.postgres.adapters.UserAdapter;
 import com.hitweb.betgain.infrastructure.postgres.entities.UserEntity;
+import com.hitweb.betgain.infrastructure.services.mail.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,10 @@ public class PostgresUserRepository implements UserRepository {
     public PostgresUserRepository(JpaUserRepository jpaUserRepository) {
         this.jpaUserRepository = jpaUserRepository;
     }
+
+
+    @Autowired
+    EmailServiceImpl emailService;
 
     @Override
     public User save(User user) {

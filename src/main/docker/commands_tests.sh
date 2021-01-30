@@ -1,3 +1,3 @@
 #!/bin/bash
 echo "lancement des tests"
-mvn test
+mvn verify

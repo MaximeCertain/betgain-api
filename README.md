@@ -41,3 +41,15 @@ make update
 <li>Visualisez les tables et leurs données ici </li>
 <img src="https://www.pixenli.com/image/St4fjUug">
 <hr>
+
+
+<h3>Configurer et Recevoir les mails</h3>
+
+<ul>
+<li>se rendre dans le fichier src/main/resources/application.properties</li>
+<li>Renseigner votre username et password mailtrap dans les deux champs concernés 
+<img src="https://www.pixenli.com/image/KfV-frSo"></li>
+<li>Pour trouver ce username/password allez sur le site mailtrap : https://mailtrap.io  (inscription automatique avec github ou google)</li>
+<li>Les deux informations se trouvent ensuite sur votre "inbox" lorsque vous cliquez sur Show Credentials<img src="https://www.pixenli.com/image/4TYsSCDH"> </li>
+</ul>
+<hr>

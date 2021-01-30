@@ -1,5 +1,6 @@
 package com.hitweb.betgain.domain.user.service;
 
+import com.hitweb.betgain.domain.mail.EmailService;
 import com.hitweb.betgain.domain.user.model.User;
 import com.hitweb.betgain.domain.user.ports.PasswordEncoderInterface;
 import com.hitweb.betgain.domain.user.usecases.EditUserUseCase;
@@ -14,7 +15,7 @@ public class DomainUserService implements UserService {
     private final PasswordEncoderInterface passwordEncoderInterface;
 
 
-    public DomainUserService(UserRepository userRepository, PasswordEncoderInterface passwordEncoderInterface) {
+    public DomainUserService(UserRepository userRepository, PasswordEncoderInterface passwordEncoderInterface, EmailService emailService) {
         this.userRepository = userRepository;
         this.passwordEncoderInterface = passwordEncoderInterface;
 

@@ -1,5 +1,6 @@
 package com.hitweb.betgain.infrastructure.services.auth;
 
+import com.hitweb.betgain.domain.mail.EmailRequest;
 import com.hitweb.betgain.domain.user.model.ERole;
 import com.hitweb.betgain.infrastructure.postgres.entities.RoleEntity;
 import com.hitweb.betgain.infrastructure.postgres.entities.UserEntity;
@@ -11,6 +12,8 @@ import com.hitweb.betgain.infrastructure.services.auth.payload.response.JwtRespo
 import com.hitweb.betgain.infrastructure.services.auth.payload.response.MessageResponse;
 import com.hitweb.betgain.infrastructure.services.auth.security.jwt.JwtUtils;
 import com.hitweb.betgain.infrastructure.services.auth.security.services.UserDetailsImpl;
+import com.hitweb.betgain.infrastructure.services.mail.EmailServiceImpl;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +45,9 @@ public class AuthService implements AuthInterface {
     @Qualifier("passwordEncoder")
     @Autowired
     PasswordEncoder encoder;
+
+    @Autowired
+    EmailServiceImpl emailService;
 
     @Autowired
     JwtUtils jwtUtils;
@@ -103,7 +109,13 @@ public class AuthService implements AuthInterface {
 
         user.setRoles(roles);
 
-        userRepository.save(user);
+        String generatedString = RandomStringUtils.randomAlphabetic(10);
+        user.setConfirmationCode(generatedString);
+
+       userRepository.save(user);
+
+        EmailRequest emailRequest = new EmailRequest(user.getEmail(), "amaury@support.fr", "votre code", "<html><body><h5>Inscription L'Equipe Bet & Gain</h5> <p> Bonjour, voici votre code d'inscription "+generatedString+" cordialement <br> L'équipe bet & gain</p></body></html>");
+        emailService.sendSimpleMessage(emailRequest);
 
         return ResponseEntity.ok(new MessageResponse("User " + user.getUsername() + " registered successfully!"));
     }

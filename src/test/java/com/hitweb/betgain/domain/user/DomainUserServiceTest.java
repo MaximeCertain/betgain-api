@@ -22,6 +22,7 @@ public class DomainUserServiceTest {
 
     @Test
     public void testFindAll() {
+
         User user = new User();
         user.setLastname("vincenzo");
         List<User> users = new ArrayList<User>();
@@ -30,7 +31,8 @@ public class DomainUserServiceTest {
 
         Iterable<User> usersDomain = domainUserService.findAll();
          long length = StreamSupport.stream(usersDomain.spliterator(), false).count();
-         assertEquals(2, length);
+         assertEquals(1, length);
 
     }
+
 }

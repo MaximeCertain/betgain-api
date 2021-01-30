@@ -14,6 +14,7 @@ public class User {
     private String username;
     private String password;
     private Set<Role> roles = new HashSet<>();
+    private String confirmationCode;
 
 
     public long getId() {
@@ -82,4 +83,13 @@ public class User {
         }
         return false;
     }
+
+    public String getConfirmationCode() {
+        return confirmationCode;
+    }
+
+    public void setConfirmationCode(String confirmationCode) {
+        this.confirmationCode = confirmationCode;
+    }
+
 }

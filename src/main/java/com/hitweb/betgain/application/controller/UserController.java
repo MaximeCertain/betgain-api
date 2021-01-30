@@ -52,6 +52,16 @@ public class UserController {
         return userService.editUser(userRequest);
     }
 
+
+    /**
+     * TODO: valider l'utilsiateur
+     * @param userRequest
+     * @return
+    @PostMapping("account/validate")
+    public UserResponse validateAccount(@Valid @RequestBody UserRequest userRequest) {
+        return userService.saveUser(userRequest);
+    } */
+
     @GetMapping("hello")
     String getHelloWorld() {
         return "ça marche de fou";
