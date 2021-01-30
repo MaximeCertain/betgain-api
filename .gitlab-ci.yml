@@ -6,7 +6,7 @@ variables:
 
 stages:
   - prepare
-  - build
+  #- build
  # - test
  # - deploy
 
@@ -18,12 +18,12 @@ update:
     - curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     - chmod +x /usr/local/bin/docker-compose
     - docker-compose --version
-
-building:
-  stage: build
-  script:
     - cd src/main/docker
     - docker-compose up -d --scale app_api_betgain=0
+#building:
+ # stage: build
+ # script:
+
 
 #testing:
   #stage: test
