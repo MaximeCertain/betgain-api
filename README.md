@@ -38,4 +38,6 @@ make update
 <li>Cliquez sur "create a server" et renseigner pgsql-server en nom <img src="https://www.pixenli.com/image/Mf7yBa-f"> </li>
 <li>Dans l'onglet "Connection"  renseigner les informations suivantes  (password : betgain )<br> <img src="https://www.pixenli.com/image/_7b3e3OD"></li></ul>
 <li>Cliquez sur save pour finaliser la connexion à la base de données</li></ul>
+<li>Visualisez les tables et leurs données ici </li>
+<img src="https://www.pixenli.com/image/St4fjUug">
 <hr>

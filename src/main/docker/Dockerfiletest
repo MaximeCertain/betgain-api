@@ -7,6 +7,6 @@ COPY . .
 #Build ( because you want to execute tests after the spring boot application is started you should disable test during build phase )
 RUN mvn clean package -DskipTests
 #Start container
-COPY src/main/docker/commands.sh /scripts/commands.sh
-RUN ["chmod", "+x", "/scripts/commands.sh"]
+COPY src/main/docker/commands_tests.sh /scripts/commands_tests.sh
+RUN ["chmod", "+x", "/scripts/commands_tests.sh"]
 ENTRYPOINT ["/scripts/commands_tests.sh"]
