@@ -25,8 +25,15 @@ update:
     - cd src/main/docker
     - docker-compose up -d --scale app_api_betgain=0
     - docker-compose up --build --force-recreate --no-deps tests
+    - $(docker inspect tests --format='{{.State.ExitCode}}')
     - testsSuccess=$(docker inspect tests --format='{{.State.ExitCode}}')
-    - $testsSuccess
+    - echo $testsSuccess
+    - if [ $testsSuccess -eq "0" ];
+      then
+      echo "Salut les jumeaux !"
+      else
+      echo "echec ipleine"
+      fi
     #building:
  # stage: build
  # script:
