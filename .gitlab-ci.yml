@@ -27,12 +27,11 @@ update:
     - docker-compose up --build --force-recreate --no-deps tests
     - $(docker inspect tests --format='{{.State.ExitCode}}')
     - testsSuccess=$(docker inspect tests --format='{{.State.ExitCode}}')
-    - echo $testsSuccess
     - if [ $testsSuccess -eq "0" ];
       then
-      echo "Salut les jumeaux !"
+      exit 0
       else
-      echo "echec ipleine"
+      exit 1
       fi
     #building:
  # stage: build
