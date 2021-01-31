@@ -25,7 +25,6 @@ update:
     - cd src/main/docker
     - docker-compose up -d --scale app_api_betgain=0
     - docker-compose up --build --force-recreate --no-deps tests
-    - $(docker inspect tests --format='{{.State.ExitCode}}')
     - testsSuccess=$(docker inspect tests --format='{{.State.ExitCode}}')
     - if [ $testsSuccess -eq "0" ];
       then
