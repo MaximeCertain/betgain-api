@@ -25,7 +25,8 @@ update:
     - cd src/main/docker
     - docker-compose up -d --scale app_api_betgain=0
     - docker-compose up --build --force-recreate --no-deps tests
-#building:
+    - docker inspect tests --format='{{.State.ExitCode}}'
+    #building:
  # stage: build
  # script:
 

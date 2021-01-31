@@ -15,7 +15,8 @@ public class User {
     private String password;
     private Set<Role> roles = new HashSet<>();
     private String confirmationCode;
-
+    private boolean validated = false;
+    private boolean strikeOff = false;
 
     public long getId() {
         return id;
@@ -92,4 +93,19 @@ public class User {
         this.confirmationCode = confirmationCode;
     }
 
+    public boolean isValidated() {
+        return validated;
+    }
+
+    public void setValidated(boolean validated) {
+        this.validated = validated;
+    }
+
+    public boolean isStrikeOff() {
+        return strikeOff;
+    }
+
+    public void setStrikeOff(boolean strikeOff) {
+        this.strikeOff = strikeOff;
+    }
 }

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AuthControllerTest {
 
-    @Autowired
+  /*  @Autowired
     private TestRestTemplate restTemplate;  //instancie automatiquement un objet TestRestTemplate
 
     @Test
@@ -31,8 +31,8 @@ public class AuthControllerTest {
         ResponseEntity<?> responseEntity = restTemplate.postForObject(uri, request, ResponseEntity.class);
         /*assertThat(foo, notNullValue());
         assertThat(foo.getName(), is("bar"));
-        ResponseEntity<?> responseEntity =  this.restTemplate.postForEntity(uri, loginRequest, ResponseEntity.class);*/
+        ResponseEntity<?> responseEntity =  this.restTemplate.postForEntity(uri, loginRequest, ResponseEntity.class);
 
         assertNotNull(responseEntity);
-    }
+    }*/
 }

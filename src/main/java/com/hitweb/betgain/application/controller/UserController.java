@@ -4,6 +4,7 @@ import com.hitweb.betgain.domain.user.model.ERole;
 import com.hitweb.betgain.domain.user.model.Role;
 import com.hitweb.betgain.domain.user.model.User;
 import com.hitweb.betgain.domain.user.usecases.payload.request.UserRequest;
+import com.hitweb.betgain.domain.user.usecases.payload.request.ValidateAccountRequest;
 import com.hitweb.betgain.domain.user.usecases.payload.response.UserResponse;
 import com.hitweb.betgain.domain.user.service.UserService;
 import com.hitweb.betgain.infrastructure.services.auth.security.WebSecurityConfig;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Collection;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -52,15 +53,16 @@ public class UserController {
         return userService.editUser(userRequest);
     }
 
-
     /**
-     * TODO: valider l'utilsiateur
-     * @param userRequest
+     * valider l'utilsiateur
+     * @param id
+     * @param validateAccountRequest
      * @return
-    @PostMapping("account/validate")
-    public UserResponse validateAccount(@Valid @RequestBody UserRequest userRequest) {
-        return userService.saveUser(userRequest);
-    } */
+     * */
+    @PostMapping("account/validate/{id}")
+    public UserResponse validateAccount(@PathVariable("id") int id, @Valid @RequestBody ValidateAccountRequest validateAccountRequest) {
+        return userService.validateAccount(validateAccountRequest, id);
+    }
 
     @GetMapping("hello")
     String getHelloWorld() {

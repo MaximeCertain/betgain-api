@@ -12,7 +12,6 @@ public class EditUserUseCase {
     private final UserRepository userRepository;
     private final PasswordEncoderInterface passwordEncoder;
 
-
     public EditUserUseCase(UserRepository userRepository, PasswordEncoderInterface passwordEncoderInterface) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoderInterface;

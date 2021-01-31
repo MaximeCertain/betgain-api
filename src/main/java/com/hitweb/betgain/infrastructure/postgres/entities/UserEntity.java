@@ -36,6 +36,12 @@ public class UserEntity {
     @Column(name = "confirmation_code", nullable = true)
     private String confirmationCode;
 
+    @Column(name = "validated", columnDefinition = "boolean default false")
+    private boolean validated = false;
+
+    @Column(name = "strike_off", columnDefinition = "boolean default false")
+    private boolean strikeOff = false;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
@@ -105,5 +111,21 @@ public class UserEntity {
 
     public void setConfirmationCode(String confirmationCode) {
         this.confirmationCode = confirmationCode;
+    }
+
+    public boolean isValidated() {
+        return validated;
+    }
+
+    public void setValidated(boolean validated) {
+        this.validated = validated;
+    }
+
+    public boolean isStrikeOff() {
+        return strikeOff;
+    }
+
+    public void setStrikeOff(boolean strikeOff) {
+        this.strikeOff = strikeOff;
     }
 }

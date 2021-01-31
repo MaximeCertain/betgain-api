@@ -19,6 +19,9 @@ public class UserAdapter {
         userEntity.setLastname(user.getLastname());
         userEntity.setPassword(user.getPassword());
         userEntity.setUsername(user.getUsername());
+        userEntity.setConfirmationCode(user.getConfirmationCode());
+        userEntity.setStrikeOff(user.isStrikeOff());
+        userEntity.setValidated(user.isValidated());
         if (user.getRoles().size() > 0) {
             Set<RoleEntity> roleEntitySet = user.getRoles().stream().map(role -> RoleAdapter.adapt(role)).collect(Collectors.toSet());
             userEntity.setRoles(roleEntitySet);
@@ -37,7 +40,9 @@ public class UserAdapter {
         user.setLastname(userEntity.getLastname());
         user.setPassword(userEntity.getPassword());
         user.setUsername(userEntity.getUsername());
-
+        user.setConfirmationCode(userEntity.getConfirmationCode());
+        user.setStrikeOff(userEntity.isStrikeOff());
+        user.setValidated(userEntity.isValidated());
         if (userEntity.getRoles().size() > 0) {
             Set<Role> roleEntitySet = userEntity.getRoles().stream().map(role -> RoleAdapter.reverse(role)).collect(Collectors.toSet());
             user.setRoles(roleEntitySet);

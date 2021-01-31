@@ -4,7 +4,9 @@ import com.hitweb.betgain.domain.mail.EmailService;
 import com.hitweb.betgain.domain.user.model.User;
 import com.hitweb.betgain.domain.user.ports.PasswordEncoderInterface;
 import com.hitweb.betgain.domain.user.usecases.EditUserUseCase;
+import com.hitweb.betgain.domain.user.usecases.ValidateAccountUseCase;
 import com.hitweb.betgain.domain.user.usecases.payload.request.UserRequest;
+import com.hitweb.betgain.domain.user.usecases.payload.request.ValidateAccountRequest;
 import com.hitweb.betgain.domain.user.usecases.payload.response.UserResponse;
 import com.hitweb.betgain.domain.user.ports.UserRepository;
 import com.hitweb.betgain.domain.user.usecases.AddUserUseCase;
@@ -36,5 +38,8 @@ public class DomainUserService implements UserService {
         return userRepository.findAll();
     }
 
-
+    @Override
+    public UserResponse validateAccount(ValidateAccountRequest validateAccountRequest, int id) {
+        return new ValidateAccountUseCase(userRepository).validate(validateAccountRequest, id);
+    }
 }

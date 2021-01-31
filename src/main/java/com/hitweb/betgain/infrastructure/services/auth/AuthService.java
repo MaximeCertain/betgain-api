@@ -2,6 +2,7 @@ package com.hitweb.betgain.infrastructure.services.auth;
 
 import com.hitweb.betgain.domain.mail.EmailRequest;
 import com.hitweb.betgain.domain.user.model.ERole;
+import com.hitweb.betgain.domain.user.model.Role;
 import com.hitweb.betgain.infrastructure.postgres.entities.RoleEntity;
 import com.hitweb.betgain.infrastructure.postgres.entities.UserEntity;
 import com.hitweb.betgain.infrastructure.postgres.repository.user.JpaRoleRepository;
@@ -109,15 +110,23 @@ public class AuthService implements AuthInterface {
 
         user.setRoles(roles);
 
-        String generatedString = RandomStringUtils.randomAlphabetic(10);
-        user.setConfirmationCode(generatedString);
+        if(hasRole(ERole.ROLE_USER, user.getRoles())){
+            String generatedString = RandomStringUtils.randomAlphabetic(10);
+            user.setConfirmationCode(generatedString);
+            EmailRequest emailRequest = new EmailRequest(user.getEmail(), "amaury@support.fr", "votre code "+user.getUsername(), "<html><body><h5>Bonjour "+user.getUsername()+" <br> Inscription L'Equipe Bet & Gain</h5> <p> Bonjour, voici votre code d'inscription "+generatedString+" cordialement <br> L'équipe bet & gain</p></body></html>");
+            emailService.sendSimpleMessage(emailRequest);
+        }
 
-       userRepository.save(user);
-
-        EmailRequest emailRequest = new EmailRequest(user.getEmail(), "amaury@support.fr", "votre code", "<html><body><h5>Inscription L'Equipe Bet & Gain</h5> <p> Bonjour, voici votre code d'inscription "+generatedString+" cordialement <br> L'équipe bet & gain</p></body></html>");
-        emailService.sendSimpleMessage(emailRequest);
+        userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User " + user.getUsername() + " registered successfully!"));
+    }
+
+    private boolean hasRole(ERole eRole, Set<RoleEntity> roles) {
+        for (RoleEntity role : roles) {
+            if (eRole == role.getName()) return true;
+        }
+        return false;
     }
 }
 
