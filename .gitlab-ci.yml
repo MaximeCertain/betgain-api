@@ -17,14 +17,9 @@ update:
     - docker:dind
   script:
     - apk add --no-cache docker-compose
-   # - apt-get update
-  #  - apt-get -y install make curl
-    # curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    #- chmod +x /usr/local/bin/docker-compose
-    - docker-compose --version
     - cd src/main/docker
-    - docker-compose up -d --scale app_api_betgain=0
-    - docker-compose up --build --force-recreate --no-deps tests
+    - docker-compose up -d db_api_betgain tests
+   # - docker-compose up --build --force-recreate --no-deps tests
     - testsSuccess=$(docker inspect tests --format='{{.State.ExitCode}}')
     - if [ $testsSuccess -eq "0" ];
       then
