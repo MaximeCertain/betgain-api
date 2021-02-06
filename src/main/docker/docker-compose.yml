@@ -21,6 +21,25 @@ services:
     networks:
       - postgres
 
+  app_dev_betgain:
+    image: 'docker-spring-boot-postgres:latest'
+    build:
+      context: .
+      dockerfile: Dockerfiledev
+    container_name: app_dev
+    ports:
+      - "11111:8080"
+    depends_on:
+      - db_api_betgain
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_api_betgain:5432/betgain #jdbc:postgresql://host:port/database
+      - SPRING_DATASOURCE_USERNAME=betgain
+      - SPRING_DATASOURCE_PASSWORD=betgain
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - PORT=8081
+    networks:
+      - postgres
+
   tests:
     build:
       context:  ../../../

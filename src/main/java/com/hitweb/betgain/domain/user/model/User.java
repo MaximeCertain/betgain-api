@@ -1,11 +1,11 @@
 package com.hitweb.betgain.domain.user.model;
 
-import com.hitweb.betgain.infrastructure.postgres.entities.RoleEntity;
+import com.hitweb.betgain.domain.user.ports.UserInterface;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class User {
+public class User implements UserInterface {
 
     private long id;
     private String firstname;

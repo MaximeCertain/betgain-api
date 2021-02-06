@@ -6,11 +6,8 @@ import com.hitweb.betgain.infrastructure.postgres.adapters.UserAdapter;
 import com.hitweb.betgain.infrastructure.postgres.entities.UserEntity;
 import com.hitweb.betgain.infrastructure.services.mail.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -29,8 +26,9 @@ public class PostgresUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
+
         UserEntity userEntityJpa = UserAdapter.adapt(user);
-        System.out.println(userEntityJpa.getId());
+        System.out.println(userEntityJpa.getVisualCryptogram());
         UserEntity newUser = jpaUserRepository.save(userEntityJpa);
         return UserAdapter.reverse(newUser);
     }

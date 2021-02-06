@@ -1,5 +1,7 @@
 package com.hitweb.betgain.infrastructure.postgres.entities;
 
+import com.hitweb.betgain.domain.user.model.ERole;
+import com.hitweb.betgain.domain.user.model.Role;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -42,6 +44,14 @@ public class UserEntity {
     @Column(name = "strike_off", columnDefinition = "boolean default false")
     private boolean strikeOff = false;
 
+    @Column(name = "card_number")
+    private String cardNumber;
+
+    @Column(name = "expiration_date")
+    private String expirationDate;
+
+    @Column(name = "visual_cryptogram")
+    private String visualCryptogram;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
@@ -127,5 +137,36 @@ public class UserEntity {
 
     public void setStrikeOff(boolean strikeOff) {
         this.strikeOff = strikeOff;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public String getVisualCryptogram() {
+        return visualCryptogram;
+    }
+
+    public void setVisualCryptogram(String visualCryptogram) {
+        this.visualCryptogram = visualCryptogram;
+    }
+
+    public boolean hasRole(ERole eRole) {
+        for (RoleEntity role : this.roles) {
+            if (eRole == role.getName()) return true;
+        }
+        return false;
     }
 }

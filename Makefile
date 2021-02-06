@@ -20,3 +20,9 @@ infos:
 tests:
 	cd src/main/docker/
 	docker-compose up --build --force-recreate --no-deps tests
+
+dev:
+	./mvnw clean package -DskipTests
+	cp target/betgain-0.0.1-SNAPSHOT.jar src/main/docker/
+	cd src/main/docker
+	docker-compose up --build --force-recreate --no-deps app_dev_betgain
