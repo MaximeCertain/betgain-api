@@ -38,7 +38,7 @@ public class DomainUserServiceTest {
 
         Iterable<User> usersDomain = domainUserService.findAll();
          long length = StreamSupport.stream(usersDomain.spliterator(), false).count();
-         assertEquals(2, length);
+         assertEquals(1, length);
 
     }
 
