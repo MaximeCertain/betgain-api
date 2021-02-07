@@ -5,7 +5,7 @@ install:
 	#./mvnw clean package -DskipTests
 	#cp target/betgain-0.0.1-SNAPSHOT.jar src/main/docker/
 	cd src/main/docker
-	docker-compose up -d --scale tests=0
+	docker-compose up -d --scale db_api_betgain pgadmin_api_betgain app_api_betgain
 
 update:
 	#./mvnw clean package -DskipTests

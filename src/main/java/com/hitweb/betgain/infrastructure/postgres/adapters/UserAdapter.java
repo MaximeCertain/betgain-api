@@ -34,6 +34,7 @@ public class UserAdapter {
             userEntity.setCardNumber(((Client) user).getCardNumber());
             userEntity.setExpirationDate(((Client) user).getExpirationDate());
             userEntity.setVisualCryptogram(((Client) user).getVisualCryptogram());
+            userEntity.setCapital(((Client) user).getCapital());
         }
 
         return userEntity;
@@ -49,6 +50,7 @@ public class UserAdapter {
             ((Client) user).setExpirationDate(userEntity.getExpirationDate());
             ((Client) user).setCardNumber(userEntity.getCardNumber());
             ((Client) user).setVisualCryptogram(userEntity.getVisualCryptogram());
+            ((Client) user).setCapital(userEntity.getCapital());
         }
 
         user.setId(userEntity.getId());

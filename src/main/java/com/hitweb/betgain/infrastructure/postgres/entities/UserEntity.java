@@ -5,6 +5,7 @@ import com.hitweb.betgain.domain.user.model.Role;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,6 +34,7 @@ public class UserEntity {
     private String password;
 
     @Column(name = "email", nullable = false)
+    @Email
     private String email;
 
     @Column(name = "confirmation_code", nullable = true)
@@ -52,6 +54,9 @@ public class UserEntity {
 
     @Column(name = "visual_cryptogram")
     private String visualCryptogram;
+
+    @Column(name = "capital", nullable = true)
+    private float capital;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
@@ -161,6 +166,14 @@ public class UserEntity {
 
     public void setVisualCryptogram(String visualCryptogram) {
         this.visualCryptogram = visualCryptogram;
+    }
+
+    public float getCapital() {
+        return capital;
+    }
+
+    public void setCapital(float capital) {
+        this.capital = capital;
     }
 
     public boolean hasRole(ERole eRole) {

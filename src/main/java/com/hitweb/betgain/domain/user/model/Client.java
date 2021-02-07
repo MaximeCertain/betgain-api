@@ -6,6 +6,7 @@ public class Client extends User implements UserInterface {
     private String cardNumber;
     private String expirationDate;
     private String visualCryptogram;
+    private float capital;
 
     public String getCardNumber() {
         return cardNumber;
@@ -29,5 +30,13 @@ public class Client extends User implements UserInterface {
 
     public void setVisualCryptogram(String visualCryptogram) {
         this.visualCryptogram = visualCryptogram;
+    }
+
+    public float getCapital() {
+        return capital;
+    }
+
+    public void setCapital(float capital) {
+        this.capital = capital;
     }
 }

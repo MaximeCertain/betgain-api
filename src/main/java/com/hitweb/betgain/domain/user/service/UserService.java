@@ -2,7 +2,6 @@ package com.hitweb.betgain.domain.user.service;
 
 
 import com.hitweb.betgain.domain.user.model.User;
-import com.hitweb.betgain.domain.user.usecases.ValidateAccountUseCase;
 import com.hitweb.betgain.domain.user.usecases.payload.request.ProfileRequest;
 import com.hitweb.betgain.domain.user.usecases.payload.request.UserRequest;
 import com.hitweb.betgain.domain.user.usecases.payload.request.ValidateAccountRequest;

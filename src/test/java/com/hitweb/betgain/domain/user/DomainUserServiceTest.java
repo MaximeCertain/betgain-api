@@ -54,7 +54,6 @@ public class DomainUserServiceTest {
 
     @Test
     public void testValidateAccount() {
-
         ValidateAccountRequest validateAccountRequest = new ValidateAccountRequest();
         validateAccountRequest.setConfirmationCode("ABCDEFG");
 
@@ -73,7 +72,6 @@ public class DomainUserServiceTest {
 
         UserResponse userResponse = new ValidateAccountUseCase(userRepository).validate(validateAccountRequest, 53);
         assertEquals("l'utilisateur a bien été validé, il peut désormais faire des retraits", userResponse.getMessage());
-
     }
 
     @Test

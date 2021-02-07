@@ -26,9 +26,7 @@ public class PostgresUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
-
         UserEntity userEntityJpa = UserAdapter.adapt(user);
-        System.out.println(userEntityJpa.getVisualCryptogram());
         UserEntity newUser = jpaUserRepository.save(userEntityJpa);
         return UserAdapter.reverse(newUser);
     }

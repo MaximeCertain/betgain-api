@@ -6,13 +6,13 @@ variables:
   RUNNER_ENV: "DOCKER_TLS_CERTDIR="
 
 stages:
-  - prepare
+  - tests
   #- build
  # - test
  # - deploy
 
-update:
-  stage: prepare
+test_app:
+  stage: tests
   services:
     - docker:dind
   script:
