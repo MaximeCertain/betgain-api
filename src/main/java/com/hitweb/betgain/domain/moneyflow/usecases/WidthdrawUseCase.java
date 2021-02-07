@@ -56,7 +56,7 @@ public class WidthdrawUseCase {
         }
 
         if ((client.getExpirationDate() == null || client.getCardNumber() == null || client.getVisualCryptogram() == null) &&
-                (widthDrawRequest.getCardNumber() == null && widthDrawRequest.getExpirationDate() == null && widthDrawRequest.getVisualCryptogram() == null)) {
+                (widthDrawRequest.getCardNumber() == null || widthDrawRequest.getExpirationDate() == null || widthDrawRequest.getVisualCryptogram() == null)) {
             moneyFlowResponse.setCodeResponse(EMoneyFlowResponseCode.MISSING_BANK_INFORMATIONS);
             moneyFlowResponse.setMessage("Informations bancaires non présentes, enregistrez les sur votre profil ou entrez les avant le dépot");
             return moneyFlowResponse;

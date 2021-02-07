@@ -1,5 +1,6 @@
 version: '3'
 #https://www.baeldung.com/spring-boot-postgresql-docker
+#https://linuxize.com/post/how-to-remove-docker-images-containers-volumes-and-networks/
 services:
 
   app_api_betgain:

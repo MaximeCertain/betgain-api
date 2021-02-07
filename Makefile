@@ -1,15 +1,10 @@
 .ONESHELL: # Only applies to all target
 
 install:
-	#git clone
-	#./mvnw clean package -DskipTests
-	#cp target/betgain-0.0.1-SNAPSHOT.jar src/main/docker/
 	cd src/main/docker
-	docker-compose up -d --scale db_api_betgain pgadmin_api_betgain app_api_betgain
+	docker-compose up -d db_api_betgain pgadmin_api_betgain app_api_betgain
 
 update:
-	#./mvnw clean package -DskipTests
-	#cp target/betgain-0.0.1-SNAPSHOT.jar src/main/docker/
 	cd src/main/docker/
 	docker-compose up --build --force-recreate --no-deps app_api_betgain
 

@@ -50,7 +50,7 @@ public class DepositUseCase {
         }
 
         if ((client.getExpirationDate() == null || client.getCardNumber() == null || client.getVisualCryptogram() == null) &&
-                (depositRequest.getCardNumber() == null && depositRequest.getExpirationDate() == null && depositRequest.getVisualCryptogram() == null)) {
+                (depositRequest.getCardNumber() == null || depositRequest.getExpirationDate() == null || depositRequest.getVisualCryptogram() == null)) {
             moneyFlowResponse.setCodeResponse(EMoneyFlowResponseCode.MISSING_BANK_INFORMATIONS);
             moneyFlowResponse.setMessage("Informations bancaires non présentes, enregistrez les sur votre profil ou entrez les avant le dépot");
             return moneyFlowResponse;

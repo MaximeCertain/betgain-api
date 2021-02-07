@@ -2,6 +2,7 @@ package com.hitweb.betgain.infrastructure.postgres.entities;
 
 import com.hitweb.betgain.domain.user.model.ERole;
 import com.hitweb.betgain.domain.user.model.Role;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -56,7 +57,8 @@ public class UserEntity {
     private String visualCryptogram;
 
     @Column(name = "capital", nullable = true)
-    private float capital;
+    @ColumnDefault("0")
+    private float capital = 0;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
