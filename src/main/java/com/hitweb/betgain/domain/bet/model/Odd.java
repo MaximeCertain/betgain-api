@@ -4,7 +4,7 @@ public class Odd {
     private OddType oddType;
     private float value;
     private boolean validated;
-    private String label;
+    private String code;
 
     public Odd(OddType oddType, float value) {
         this.oddType = oddType;
@@ -35,7 +35,7 @@ public class Odd {
         this.validated = validated;
     }
 
-    public String getLabel() throws Exception {
+   /* public String getLabel() throws Exception {
         switch (oddType.getCode()) {
             case AWAY_TEAM_WON:
                 return "Victoire de l'équipe";
@@ -44,6 +44,13 @@ public class Odd {
             default:
                 throw new Exception();
         }
+    }*/
+
+    public String getCode() {
+        return code;
     }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
 }

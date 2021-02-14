@@ -19,3 +19,10 @@ INSERT INTO money_flow_state(money_flow_state_id, code, label) VALUES
 (1, 'DEPOSIT', 'Dépôt d''argent'),
 (2, 'WIDTHDRAW', 'Retrait d''argent')
 ON CONFLICT DO NOTHING;
+
+INSERT INTO bet_state(bet_state_id, code, label) VALUES
+(1, 'ISSUED', 'Paris émis'),
+(2, 'CANCELED', 'Paris annulé'),
+(3, 'WON', 'Paris gagné'),
+(4, 'FAILED', 'Paris raté')
+ON CONFLICT DO NOTHING;
