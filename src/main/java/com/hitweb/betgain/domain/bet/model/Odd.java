@@ -1,14 +1,21 @@
 package com.hitweb.betgain.domain.bet.model;
 
+import com.hitweb.betgain.domain.match.model.Match;
+
 public class Odd {
+    private long id;
     private OddType oddType;
     private float value;
     private boolean validated;
     private String code;
 
-    public Odd(OddType oddType, float value) {
+    private Match match;
+
+    public Odd(OddType oddType, float value, long id) {
         this.oddType = oddType;
         this.value = value;
+        this.id = id;
+
     }
 
     public OddType getOddType() {
@@ -52,5 +59,21 @@ public class Odd {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Match getMatch() {
+        return match;
+    }
+
+    public void setMatch(Match match) {
+        this.match = match;
     }
 }

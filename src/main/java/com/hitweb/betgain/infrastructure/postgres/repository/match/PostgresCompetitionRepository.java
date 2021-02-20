@@ -18,21 +18,30 @@ import java.util.List;
 public class PostgresCompetitionRepository implements CompetitionRepository {
     @Override
     public List<Competition> getNextMatchsSinceCompetition() {
+        //requêter api scrapping
 
         Competition competition = new Competition(1, "Ligue 1", new Date(), new Date(), "L1");
-        Opponent opponentHome = new Opponent(EOpponent.HOME, 1, "Olympique de marseille", "marseille.jpg", "MAR");
-        Opponent opponentAway = new Opponent(EOpponent.AWAY, 2, "Paris Saint Germain", "psg.png", "PSG");
+        Opponent opponentHome = new Opponent(EOpponent.HOME, 1, "Olympique de marseille", "marseille.jpg", "MAR", 0, 0, 0);
+        Opponent opponentAway = new Opponent(EOpponent.AWAY, 2, "Paris Saint Germain", "psg.png", "PSG", 0, 0, 0);
         Match match = new Match(1, new Date(), opponentHome, opponentAway);
         OddType oddType = new OddType(1, EOddType.HOME_TEAM_WON, "Victoire domicile");
         OddType oddType2 = new OddType(1, EOddType.HOME_TEAM_WON, "Victoire domicile");
-        Odd odd = new Odd(oddType, 3.2f);
-        Odd odd2 = new Odd(oddType2, 1.2f);
+        Odd odd = new Odd(oddType, 3.2f,1);
+        Odd odd2 = new Odd(oddType2, 1.2f,2);
+
         match.addOdd(odd);
         match.addOdd(odd2);
 
         competition.addMatch(match);
         List<Competition> competitions = new ArrayList<Competition>();
         competitions.add(competition);
+
+        //checker si un match n'est pas enregistré en base
+        //pas enregistré => on l'enregistre
+        //non enregistrable => on skip
+
+        //retourne la liste des matchs en models
+
 
         return competitions;
     }

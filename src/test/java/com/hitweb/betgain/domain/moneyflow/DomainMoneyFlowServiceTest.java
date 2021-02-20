@@ -37,7 +37,7 @@ public class DomainMoneyFlowServiceTest {
     UserRepository userRepository;
 
     @Test
-    public void testDepositUseCase() {
+    public void testMakeMoneyFlow() {
         DepositRequest depositRequest = new DepositRequest();
 
         User loggedUser = new User();

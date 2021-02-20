@@ -7,12 +7,16 @@ public class Opponent extends Team {
     private int yellowCardNumber;
     private int redCardNumber;
 
-    public Opponent(EOpponent type, long id, String name, String logo, String code) {
+    public Opponent(EOpponent type, long id, String name, String logo, String code, int goalsNumber, int yellowCardNumber, int redCardNumber) {
         super(id, name, logo, code);
         this.type = type;
+        this.type = type;
+        this.goalsNumber = goalsNumber;
+        this.yellowCardNumber = yellowCardNumber;
+        this.redCardNumber = redCardNumber;
+
 
     }
-
     public EOpponent getType() {
         return type;
     }
