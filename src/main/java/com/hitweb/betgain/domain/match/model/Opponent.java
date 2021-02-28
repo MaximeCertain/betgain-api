@@ -6,6 +6,7 @@ public class Opponent extends Team {
     private int goalsNumber;
     private int yellowCardNumber;
     private int redCardNumber;
+    private Team team;
 
     public Opponent(EOpponent type, long id, String name, String logo, String code, int goalsNumber, int yellowCardNumber, int redCardNumber) {
         super(id, name, logo, code);
@@ -47,5 +48,13 @@ public class Opponent extends Team {
 
     public void setRedCardNumber(int redCardNumber) {
         this.redCardNumber = redCardNumber;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

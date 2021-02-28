@@ -18,6 +18,9 @@ public class MatchEntity {
     @Column(name = "date")
     private Date date;
 
+    @Column(name = "code")
+    private String code;
+
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = {CascadeType.ALL})
     @JoinColumn(name = "competition_id", nullable = false)
@@ -33,6 +36,7 @@ public class MatchEntity {
     @OneToOne(targetEntity = OpponentEntity.class)
     @JoinColumn(name = "home_team_id", nullable = false)
     private OpponentEntity homeTeam;
+
 
     public long getId() {
         return id;
@@ -72,5 +76,21 @@ public class MatchEntity {
 
     public void setHomeTeam(OpponentEntity homeTeam) {
         this.homeTeam = homeTeam;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public CompetitionEntity getCompetition() {
+        return competition;
+    }
+
+    public void setCompetition(CompetitionEntity competition) {
+        this.competition = competition;
     }
 }

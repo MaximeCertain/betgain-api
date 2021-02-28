@@ -2,20 +2,24 @@ package com.hitweb.betgain.domain.bet.model;
 
 import com.hitweb.betgain.domain.match.model.Match;
 
+import java.util.Date;
+
 public class Odd {
+
     private long id;
     private OddType oddType;
     private float value;
     private boolean validated;
     private String code;
-
     private Match match;
+    private Date date;
 
-    public Odd(OddType oddType, float value, long id) {
+
+    public Odd(OddType oddType, float value, long id, Date date) {
         this.oddType = oddType;
         this.value = value;
         this.id = id;
-
+        this.date = date;
     }
 
     public OddType getOddType() {
@@ -75,5 +79,13 @@ public class Odd {
 
     public void setMatch(Match match) {
         this.match = match;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

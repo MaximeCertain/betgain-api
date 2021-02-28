@@ -1,6 +1,7 @@
 package com.hitweb.betgain.infrastructure.postgres.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "odd")
@@ -24,6 +25,12 @@ public class OddEntity {
     @ManyToOne(targetEntity = MatchEntity.class)
     @JoinColumn(name = "match_id", nullable = false)
     private MatchEntity matchEntity;
+
+    @Column(name = "code")
+    private String code;
+
+    @Column(name = "date")
+    private Date date;
 
     public long getId() {
         return id;
@@ -63,5 +70,21 @@ public class OddEntity {
 
     public void setMatchEntity(MatchEntity matchEntity) {
         this.matchEntity = matchEntity;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

@@ -1,7 +1,5 @@
 package com.hitweb.betgain.infrastructure.postgres.entities;
 
-import com.hitweb.betgain.domain.match.model.EOpponent;
-
 import javax.persistence.*;
 
 @Entity

@@ -26,3 +26,17 @@ INSERT INTO bet_state(bet_state_id, code, label) VALUES
 (3, 'WON', 'Paris gagné'),
 (4, 'FAILED', 'Paris raté')
 ON CONFLICT DO NOTHING;
+
+INSERT INTO odd_type(odd_type_id, code, label) VALUES
+(1, 'HOME_TEAM_WON', 'Victoire de l''équipe à domicile'),
+(2, 'AWAY_TEAM_WON', 'Victoire de l''équipe à l''extérieur'),
+(3, 'DRAW', 'Match nul')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO competition(competition_id, code, end_date, name, start_date) VALUES
+(1, 'L1',null, 'Ligue 1', null),
+(2, 'PL',null, 'Premier League', null),
+(3, 'SA',null, 'Série A', null),
+(4, 'BL',null, 'Bundesliga', null),
+(5, 'LL',null, 'Liga', null)
+ON CONFLICT DO NOTHING;

@@ -2,7 +2,9 @@ package com.hitweb.betgain.application.controller;
 
 import com.hitweb.betgain.domain.bet.service.BetService;
 import com.hitweb.betgain.domain.bet.service.payload.request.BetRequest;
+import com.hitweb.betgain.domain.bet.service.payload.request.ListBetRequest;
 import com.hitweb.betgain.domain.bet.service.payload.response.BetResponse;
+import com.hitweb.betgain.domain.bet.service.payload.response.ListBetResponse;
 import com.hitweb.betgain.infrastructure.services.auth.security.WebSecurityConfig;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,5 +26,11 @@ public class BetController {
         betRequest.setUserId(id);
         betRequest.setLoggedClient(WebSecurityConfig.getUser());
         return betService.bet(betRequest);
+    }
+
+    @GetMapping("history/{id}")
+    public ListBetResponse getHistory(@PathVariable("id") int id) {
+        ListBetRequest listBetRequest = new ListBetRequest(id, WebSecurityConfig.getUser());
+        return betService.getHistory(listBetRequest);
     }
 }

@@ -58,7 +58,7 @@ public class DomainBetServiceTest {
         Mockito.when(userRepository.findUser(5)).thenReturn(client);
 
         OddType oddType = new OddType(1, EOddType.HOME_TEAM_WON, "Equipe domicile gagne");
-        Odd odd = new Odd(oddType, 12.63f, 3);
+        Odd odd = new Odd(oddType, 12.63f, 3, new Date());
 
 
         BetRequest betRequest = new BetRequest();

@@ -5,7 +5,10 @@ import com.hitweb.betgain.domain.bet.ports.BetStateRepository;
 import com.hitweb.betgain.domain.bet.ports.OddRepository;
 import com.hitweb.betgain.domain.bet.ports.OddTypeRepository;
 import com.hitweb.betgain.domain.bet.service.payload.request.BetRequest;
+import com.hitweb.betgain.domain.bet.service.payload.request.ListBetRequest;
 import com.hitweb.betgain.domain.bet.service.payload.response.BetResponse;
+import com.hitweb.betgain.domain.bet.service.payload.response.ListBetResponse;
+import com.hitweb.betgain.domain.bet.usecases.BetHistoryUseCase;
 import com.hitweb.betgain.domain.bet.usecases.BetUseCase;
 import com.hitweb.betgain.domain.user.ports.UserRepository;
 
@@ -28,4 +31,10 @@ public class DomainBetService implements BetService {
     public BetResponse bet(BetRequest betRequest) {
         return (new BetUseCase(betRepository, betStateRepository, oddTypeRepository, oddRepository, userRepository)).bet(betRequest);
     }
+
+    public ListBetResponse getHistory(ListBetRequest listBetRequest) {
+        return (new BetHistoryUseCase(betRepository, betStateRepository, oddTypeRepository, oddRepository, userRepository)).getBets(listBetRequest);
+
+    }
+
 }

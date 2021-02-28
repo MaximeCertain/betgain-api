@@ -12,7 +12,7 @@ public class OddAdapter {
         OddEntity oddEntity = new OddEntity();
         oddEntity.setId(odd.getId());
         oddEntity.setValue(odd.getValue());
-
+        oddEntity.setDate(odd.getDate());
         if (odd.getOddType() != null) {
             OddTypeEntity oddTypeEntity = OddTypeAdapter.adapt(odd.getOddType());
             oddEntity.setOddType(oddTypeEntity);
@@ -28,7 +28,7 @@ public class OddAdapter {
 
     public static Odd reverse(OddEntity oddEntity) {
 
-        Odd odd = new Odd(OddTypeAdapter.reverse(oddEntity.getOddType()), oddEntity.getValue(), oddEntity.getId());
+        Odd odd = new Odd(OddTypeAdapter.reverse(oddEntity.getOddType()), oddEntity.getValue(), oddEntity.getId(), oddEntity.getDate());
 
         return odd;
     }

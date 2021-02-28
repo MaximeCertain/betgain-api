@@ -18,11 +18,14 @@ public class Match {
     private Opponent homeTeam;
     private Opponent awayTeam;
 
-    public Match(long id, Date date, Opponent homeTeam, Opponent awayTeam) {
+    private String code;
+
+    public Match(long id, Date date, Opponent homeTeam, Opponent awayTeam, String code) {
         this.id = id;
         this.date = date;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
+        this.code = code;
     }
 
     public long getId() {
@@ -48,7 +51,8 @@ public class Match {
     public void setOdds(List<Odd> odds) {
         this.odds = odds;
     }
-    public void addOdd(Odd odd){
+
+    public void addOdd(Odd odd) {
         odds.add(odd);
     }
 
@@ -74,5 +78,13 @@ public class Match {
 
     public void setCompetition(Competition competition) {
         this.competition = competition;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
