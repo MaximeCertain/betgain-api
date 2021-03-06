@@ -21,6 +21,10 @@ public class BetEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
+    @ManyToOne(targetEntity = OddEntity.class)
+    @JoinColumn(name = "odd_id", nullable = false)
+    private OddEntity odd;
+
     public long getId() {
         return id;
     }
@@ -51,5 +55,13 @@ public class BetEntity {
 
     public void setUser(UserEntity user) {
         this.user = user;
+    }
+
+    public OddEntity getOdd() {
+        return odd;
+    }
+
+    public void setOdd(OddEntity odd) {
+        this.odd = odd;
     }
 }

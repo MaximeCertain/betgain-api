@@ -33,7 +33,7 @@ public class BetUseCase {
     public BetResponse bet(BetRequest betRequest) {
         BetResponse betResponse = new BetResponse();
         //client souhaitant parier
-        if(betRequest.getUserId() != betRequest.getLoggedClient().getId()){
+        if (betRequest.getUserId() != betRequest.getLoggedClient().getId()) {
             betResponse.setMessage("Le client ne peut pas parier que pour lui même");
             betResponse.setResponseCode(EBetResponseCode.INNAPROPRIATE_USER);
             return betResponse;
@@ -45,7 +45,7 @@ public class BetUseCase {
             betResponse.setResponseCode(EBetResponseCode.INNAPROPRIATE_USER);
             return betResponse;
         }
-        if (client.getCapital() < betRequest.getAmount() || betRequest.getAmount() <=0) {
+        if (client.getCapital() < betRequest.getAmount() || betRequest.getAmount() <= 0) {
             betResponse.setMessage("Le client n'a pas le capital suffisant pour parier");
             betResponse.setResponseCode(EBetResponseCode.INSUFFICIENT_FOUND);
             return betResponse;
@@ -63,6 +63,14 @@ public class BetUseCase {
         Bet betSaved = betRepository.save(bet);
         betResponse.setBet(betSaved);
         betResponse.setResponseCode(EBetResponseCode.SUCCESS);
+
+        System.out.println(bet.getAmount());
+        System.out.println("------------------------------------");
+        System.out.println(bet.getOdd().getValue());
+
+        //MAJ du capital de l'utilisateur
+        client.setCapital(client.getCapital() - bet.getAmount());
+        userRepository.save(client);
 
         return betResponse;
     }

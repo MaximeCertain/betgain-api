@@ -72,13 +72,13 @@ public class PostgresCompetitionRepository implements CompetitionRepository {
          "oddType": {
          "code": "HOME_TEAM_WON",
          },
-         "value": 77.3,
+         "value": 1.3,
          },
          {
          "oddType": {
          "code": "AWAY_TEAM_WON",
          },
-         "value": 8.4442,
+         "value": 3.2,
          }
          ]
          "homeTeam": {

@@ -2,13 +2,12 @@ package com.hitweb.betgain.infrastructure.postgres.adapters;
 
 import com.hitweb.betgain.domain.bet.model.Bet;
 import com.hitweb.betgain.domain.bet.model.Bet;
+import com.hitweb.betgain.domain.bet.model.Odd;
 import com.hitweb.betgain.domain.moneyflow.model.MoneyFlowState;
 import com.hitweb.betgain.domain.user.model.Client;
 import com.hitweb.betgain.domain.user.model.User;
+import com.hitweb.betgain.infrastructure.postgres.entities.*;
 import com.hitweb.betgain.infrastructure.postgres.entities.BetEntity;
-import com.hitweb.betgain.infrastructure.postgres.entities.BetEntity;
-import com.hitweb.betgain.infrastructure.postgres.entities.MoneyFlowStateEntity;
-import com.hitweb.betgain.infrastructure.postgres.entities.UserEntity;
 
 public class BetAdapter {
     public static BetEntity adapt(Bet bet) {
@@ -20,6 +19,11 @@ public class BetAdapter {
         if (bet.getUser() != null) {
             UserEntity userEntity = UserAdapter.adapt(bet.getUser());
             betEntity.setUser(userEntity);
+        }
+
+        if (bet.getOdd() != null) {
+            OddEntity oddEntity = OddAdapter.adapt(bet.getOdd());
+            betEntity.setOdd(oddEntity);
         }
 
         return betEntity;
@@ -34,6 +38,11 @@ public class BetAdapter {
         if (betEntity.getUser() != null) {
             User user = UserAdapter.reverse(betEntity.getUser());
             bet.setUser((Client) user);
+        }
+
+        if (betEntity.getOdd() != null) {
+            Odd odd = OddAdapter.reverse(betEntity.getOdd());
+            bet.setOdd(odd);
         }
 
         return bet;
