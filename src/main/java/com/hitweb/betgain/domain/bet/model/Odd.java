@@ -1,6 +1,7 @@
 package com.hitweb.betgain.domain.bet.model;
 
 import com.hitweb.betgain.domain.match.model.Match;
+import com.hitweb.betgain.domain.match.model.Opponent;
 
 import java.util.Date;
 
@@ -87,5 +88,22 @@ public class Odd {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void validateResult(Opponent homeTeam, Opponent awayTeam) {
+        switch (this.oddType.getCode()) {
+            case HOME_TEAM_WON:
+                if (homeTeam.getGoalsNumber() > awayTeam.getGoalsNumber()) {
+                    this.validated = true;
+                }
+            case AWAY_TEAM_WON:
+                if (awayTeam.getGoalsNumber() > homeTeam.getGoalsNumber()) {
+                    this.validated = true;
+                }
+            case DRAW:
+                if (awayTeam.getGoalsNumber() == homeTeam.getGoalsNumber()) {
+                    this.validated = true;
+                }
+        }
     }
 }

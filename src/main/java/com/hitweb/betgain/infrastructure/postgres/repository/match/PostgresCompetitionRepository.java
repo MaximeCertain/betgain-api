@@ -135,7 +135,6 @@ public class PostgresCompetitionRepository implements CompetitionRepository {
                     awayTeamExisted = postgresTeamRepository.save(matchFromScrapping.getAwayTeam());
                 }
 
-
                 Match matchExisted = postgresMatchRepository.getMatch(matchFromScrapping.getCode());
 
                 if (matchExisted == null) {
@@ -156,7 +155,6 @@ public class PostgresCompetitionRepository implements CompetitionRepository {
                     matchExisted = postgresMatchRepository.save(matchFromScrapping);
                     matchExisted.setHomeTeam(homeTeam);
                     matchExisted.setAwayTeam(awayTeam);
-
                 }
 
                 for (Odd odd1 : matchFromScrapping.getOdds()) {
@@ -166,9 +164,6 @@ public class PostgresCompetitionRepository implements CompetitionRepository {
                     Odd alreadyExistedOdd = postgresOddRepository.getLastOddForOddTypeAndMatch(oddTypeFromOddScrapping, matchExisted);
 
                     if(alreadyExistedOdd == null  ||  (odd1.getValue() != alreadyExistedOdd.getValue())){
-                      //  System.out.println(odd1.getValue());
-                       // System.out.println(alreadyExistedOdd.getValue());
-                        //System.out.println(odd1.getValue() != alreadyExistedOdd.getValue());
 
                         odd1.setOddType(oddTypeFromOddScrapping);
                         odd1.setMatch(matchExisted);

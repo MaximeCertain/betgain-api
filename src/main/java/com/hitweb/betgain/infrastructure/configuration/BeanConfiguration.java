@@ -7,6 +7,8 @@ import com.hitweb.betgain.domain.bet.ports.OddTypeRepository;
 import com.hitweb.betgain.domain.bet.service.BetService;
 import com.hitweb.betgain.domain.bet.service.DomainBetService;
 import com.hitweb.betgain.domain.match.ports.CompetitionRepository;
+import com.hitweb.betgain.domain.match.ports.MatchRepository;
+import com.hitweb.betgain.domain.match.ports.OpponentRepository;
 import com.hitweb.betgain.domain.match.service.DomainMatchService;
 import com.hitweb.betgain.domain.match.service.MatchService;
 import com.hitweb.betgain.domain.moneyflow.ports.MoneyFlowRepository;
@@ -34,8 +36,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    MatchService matchService(CompetitionRepository competitionRepository) {
-        return new DomainMatchService(competitionRepository);
+    MatchService matchService(CompetitionRepository competitionRepository, MatchRepository matchRepository, OpponentRepository opponentRepository, BetRepository betRepository, OddRepository oddRepository, BetStateRepository betStateRepository, UserRepository userRepository) {
+        return new DomainMatchService(competitionRepository, matchRepository, opponentRepository, betRepository, oddRepository, betStateRepository, userRepository);
     }
 
     @Bean

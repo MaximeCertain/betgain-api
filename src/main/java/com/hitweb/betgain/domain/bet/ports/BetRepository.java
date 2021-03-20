@@ -8,5 +8,6 @@ import java.util.List;
 public interface BetRepository {
     Bet save(Bet bet);
     List<Bet> getBetsHistoric(long id);
+    public List<Bet> getBetsSinceOdd(long id);
 
 }

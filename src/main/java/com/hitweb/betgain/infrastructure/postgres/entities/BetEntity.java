@@ -17,7 +17,7 @@ public class BetEntity {
     @Column(name = "date")
     private Date date;
 
-    @ManyToOne(targetEntity = UserEntity.class)
+    @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 

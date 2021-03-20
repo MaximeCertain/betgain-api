@@ -1,16 +1,13 @@
 package com.hitweb.betgain.infrastructure.postgres.repository.match;
 
-import com.hitweb.betgain.domain.match.model.Match;
 import com.hitweb.betgain.domain.match.model.Team;
-import com.hitweb.betgain.domain.match.ports.MatchRepository;
-import com.hitweb.betgain.infrastructure.postgres.adapters.MatchAdapter;
+import com.hitweb.betgain.domain.match.ports.TeamRepository;
 import com.hitweb.betgain.infrastructure.postgres.adapters.TeamAdapter;
-import com.hitweb.betgain.infrastructure.postgres.entities.MatchEntity;
 import com.hitweb.betgain.infrastructure.postgres.entities.TeamEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PostgresTeamRepository implements MatchRepository {
+public class PostgresTeamRepository implements TeamRepository {
 
 
     private final JpaTeamRepository jpaTeamRepository;

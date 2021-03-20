@@ -20,6 +20,11 @@ public class PostgresOpponentRepository implements OpponentRepository {
         OpponentEntity opponentEntity = OpponentAdapter.adapt(opponent);
         OpponentEntity opponentEntity1 = jpaOpponentRepository.save(opponentEntity);
         return OpponentAdapter.reverse(opponentEntity1);
-
     }
+
+    public Opponent getOpponent(long idMatch, String codeTeam) {
+        OpponentEntity opponentEntity = jpaOpponentRepository.findSinceOddType(idMatch, codeTeam);
+        return OpponentAdapter.reverse(opponentEntity);
+    }
+
 }
