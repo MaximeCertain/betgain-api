@@ -32,6 +32,9 @@ public class OddEntity {
     @Column(name = "date")
     private Date date;
 
+    @Column(name = "validated")
+    private boolean validated = false;
+
     public long getId() {
         return id;
     }
@@ -86,5 +89,13 @@ public class OddEntity {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public boolean isValidated() {
+        return validated;
+    }
+
+    public void setValidated(boolean validated) {
+        this.validated = validated;
     }
 }

@@ -24,16 +24,7 @@ public class TreatMatchResultsUseCase {
     //je veux que les côtes soient validés ou non
 
     //afin de mettre à jour le statut des paris qui ont été joués (réussi, paerdu ...)
-
-
-    //1 MAJ les deux opponent d'un match avc le nb de buts
-
-    //2 récupérer les odds d'un match
-
-    //3 pour chaque odd setter la colonne value pour savoir si elle estr validée ou non
-
-    //4 pour chaque paris d'une odd changer le statut en fonction du résultat de la colonne odd
-
+    
     private final MatchRepository matchRepository;
     private final OpponentRepository opponentRepository;
     private final OddRepository oddRepository;
@@ -60,7 +51,7 @@ public class TreatMatchResultsUseCase {
         MatchResultsResponse response = new MatchResultsResponse();
 
         Match match = matchRepository.getMatch(matchResultsRequest.getCodeMatch());
-
+        System.out.println(match.getId());
         if (match == null) {
             response.setMessage("Le match n'a pas été trouvé, impossible de traiter les résultats");
             return response;
@@ -72,7 +63,6 @@ public class TreatMatchResultsUseCase {
         Opponent awayTeam = opponentRepository.getOpponent(match.getId(), matchResultsRequest.getAwayTeam().getCode());
         Opponent homeTeam = opponentRepository.getOpponent(match.getId(), matchResultsRequest.getHomeTeam().getCode());
 
-
         awayTeam.setGoalsNumber(awayTeamScrapped.getGoalsNumber());
         awayTeam.setYellowCardNumber(awayTeamScrapped.getYellowCardNumber());
         awayTeam.setRedCardNumber(awayTeamScrapped.getRedCardNumber());
@@ -83,18 +73,25 @@ public class TreatMatchResultsUseCase {
 
         opponentRepository.save(homeTeam);
         opponentRepository.save(awayTeam);
+        match.setOdds(oddRepository.findByMatchId(match));
 
         for (Odd odd : match.getOdds()) {
             //valide ou non la côte de ce match.
             odd.validateResult(homeTeam, awayTeam);
-            oddRepository.save(odd);
             List<Bet> bets = betRepository.getBetsSinceOdd(odd.getId());
+            odd.setMatch(match);
+            oddRepository.save(odd);
 
             boolean success = odd.isValidated();
             EBetState code = success ? EBetState.WON : EBetState.FAILED;
             BetState finalBetState = betStateRepository.findBetStateByCode(code);
-System.out.println(success);
+
             for (Bet bet : bets) {
+
+                if (!bet.getBetState().getCode().equals(EBetState.ISSUED.toString())) {
+                    continue;
+                }
+
                 bet.setBetState(finalBetState);
                 betRepository.save(bet);
                 if (success) {
@@ -105,8 +102,8 @@ System.out.println(success);
                     response.incrementNbBetsTreated();
                 }
             }
-        }
 
+        }
         response.setMessage("Le match " + homeTeam.getTeam().getName() + " contre " + awayTeam.getTeam().getName() + " a bien été traité");
         System.out.println(response.getMessage());
         System.out.println(response.getNbBets() + "  paris traités");

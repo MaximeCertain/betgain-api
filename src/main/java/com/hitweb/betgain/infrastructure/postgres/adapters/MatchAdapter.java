@@ -32,7 +32,7 @@ public class MatchAdapter {
     }
 
     public static Match reverse(MatchEntity matchEntity) {
-
+        System.out.println(matchEntity.getOdds().size());
         Match match = new Match(matchEntity.getId(), matchEntity.getDate(), null, null, matchEntity.getCode());
 
         return match;

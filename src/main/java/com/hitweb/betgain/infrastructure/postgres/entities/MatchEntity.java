@@ -1,6 +1,7 @@
 package com.hitweb.betgain.infrastructure.postgres.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,7 +27,8 @@ public class MatchEntity {
     @JoinColumn(name = "competition_id", nullable = false)
     private CompetitionEntity competition;
 
-    @OneToMany(targetEntity = OddEntity.class)
+    @JsonManagedReference
+    @OneToMany(targetEntity = OddEntity.class, fetch = FetchType.EAGER)
     private List<OddEntity> odds = new ArrayList<>();
 
     @OneToOne(targetEntity = OpponentEntity.class)

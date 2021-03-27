@@ -18,6 +18,7 @@ public class PostgresMatchRepository implements MatchRepository {
 
     public Match getMatch(String code) {
         MatchEntity matchEntity = jpaMatchRepository.findByCode(code);
+        System.out.println(matchEntity.getOdds().size());
 
         if (matchEntity == null) {
             return null;

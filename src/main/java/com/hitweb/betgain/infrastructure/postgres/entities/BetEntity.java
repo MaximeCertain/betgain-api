@@ -25,6 +25,10 @@ public class BetEntity {
     @JoinColumn(name = "odd_id", nullable = false)
     private OddEntity odd;
 
+    @ManyToOne(targetEntity = BetStateEntity.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "bet_state_id", nullable = true)
+    private BetStateEntity betState;
+
     public long getId() {
         return id;
     }
@@ -63,5 +67,13 @@ public class BetEntity {
 
     public void setOdd(OddEntity odd) {
         this.odd = odd;
+    }
+
+    public BetStateEntity getBetState() {
+        return betState;
+    }
+
+    public void setBetState(BetStateEntity betState) {
+        this.betState = betState;
     }
 }

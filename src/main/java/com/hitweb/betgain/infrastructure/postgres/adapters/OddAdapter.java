@@ -13,6 +13,7 @@ public class OddAdapter {
         oddEntity.setId(odd.getId());
         oddEntity.setValue(odd.getValue());
         oddEntity.setDate(odd.getDate());
+        oddEntity.setValidated(odd.isValidated());
         if (odd.getOddType() != null) {
             OddTypeEntity oddTypeEntity = OddTypeAdapter.adapt(odd.getOddType());
             oddEntity.setOddType(oddTypeEntity);

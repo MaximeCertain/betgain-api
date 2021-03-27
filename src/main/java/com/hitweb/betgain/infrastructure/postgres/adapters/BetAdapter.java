@@ -2,6 +2,7 @@ package com.hitweb.betgain.infrastructure.postgres.adapters;
 
 import com.hitweb.betgain.domain.bet.model.Bet;
 import com.hitweb.betgain.domain.bet.model.Bet;
+import com.hitweb.betgain.domain.bet.model.BetState;
 import com.hitweb.betgain.domain.bet.model.Odd;
 import com.hitweb.betgain.domain.moneyflow.model.MoneyFlowState;
 import com.hitweb.betgain.domain.user.model.Client;
@@ -26,6 +27,11 @@ public class BetAdapter {
             betEntity.setOdd(oddEntity);
         }
 
+        if(bet.getBetState() != null){
+            BetStateEntity betStateEntity = BetStateAdapter.adapt(bet.getBetState());
+            betEntity.setBetState(betStateEntity);
+        }
+
         return betEntity;
     }
 
@@ -43,6 +49,11 @@ public class BetAdapter {
         if (betEntity.getOdd() != null) {
             Odd odd = OddAdapter.reverse(betEntity.getOdd());
             bet.setOdd(odd);
+        }
+
+        if(betEntity.getBetState() != null){
+            BetState betState = BetStateAdapter.reverse(betEntity.getBetState());
+            bet.setBetState(betState);
         }
 
         return bet;
