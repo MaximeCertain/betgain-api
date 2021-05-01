@@ -1,9 +1,6 @@
 package com.hitweb.betgain.infrastructure.configuration;
 
-import com.hitweb.betgain.domain.bet.ports.BetRepository;
-import com.hitweb.betgain.domain.bet.ports.BetStateRepository;
-import com.hitweb.betgain.domain.bet.ports.OddRepository;
-import com.hitweb.betgain.domain.bet.ports.OddTypeRepository;
+import com.hitweb.betgain.domain.bet.ports.*;
 import com.hitweb.betgain.domain.bet.service.BetService;
 import com.hitweb.betgain.domain.bet.service.DomainBetService;
 import com.hitweb.betgain.domain.match.ports.CompetitionRepository;
@@ -41,7 +38,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    BetService betService(BetRepository betRepository, BetStateRepository betStateRepository, OddTypeRepository oddTypeRepository, OddRepository oddRepository, UserRepository userRepository) {
-        return new DomainBetService(betRepository, betStateRepository, oddTypeRepository, oddRepository, userRepository);
+    BetService betService(BetRepository betRepository, BetStateRepository betStateRepository, OddTypeRepository oddTypeRepository, OddRepository oddRepository, UserRepository userRepository, CommunityBetRepository communityBetRepository) {
+        return new DomainBetService(betRepository, betStateRepository, oddTypeRepository, oddRepository, userRepository, communityBetRepository);
     }
 }

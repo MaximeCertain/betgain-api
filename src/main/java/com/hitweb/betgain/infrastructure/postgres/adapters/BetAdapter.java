@@ -1,10 +1,8 @@
 package com.hitweb.betgain.infrastructure.postgres.adapters;
 
 import com.hitweb.betgain.domain.bet.model.Bet;
-import com.hitweb.betgain.domain.bet.model.Bet;
 import com.hitweb.betgain.domain.bet.model.BetState;
 import com.hitweb.betgain.domain.bet.model.Odd;
-import com.hitweb.betgain.domain.moneyflow.model.MoneyFlowState;
 import com.hitweb.betgain.domain.user.model.Client;
 import com.hitweb.betgain.domain.user.model.User;
 import com.hitweb.betgain.infrastructure.postgres.entities.*;
@@ -30,6 +28,11 @@ public class BetAdapter {
         if(bet.getBetState() != null){
             BetStateEntity betStateEntity = BetStateAdapter.adapt(bet.getBetState());
             betEntity.setBetState(betStateEntity);
+        }
+
+        if(bet.getCommunityBet() != null){
+            CommunityBetEntity communityBetEntity = CommunityBetAdapter.adapt(bet.getCommunityBet());
+            betEntity.setCommunityBetEntity(communityBetEntity);
         }
 
         return betEntity;

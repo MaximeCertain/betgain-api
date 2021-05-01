@@ -29,6 +29,10 @@ public class BetEntity {
     @JoinColumn(name = "bet_state_id", nullable = true)
     private BetStateEntity betState;
 
+    @ManyToOne(targetEntity = CommunityBetEntity.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "community_bet_id", nullable = true)
+    private CommunityBetEntity communityBetEntity;
+
     public long getId() {
         return id;
     }
@@ -75,5 +79,13 @@ public class BetEntity {
 
     public void setBetState(BetStateEntity betState) {
         this.betState = betState;
+    }
+
+    public CommunityBetEntity getCommunityBetEntity() {
+        return communityBetEntity;
+    }
+
+    public void setCommunityBetEntity(CommunityBetEntity communityBetEntity) {
+        this.communityBetEntity = communityBetEntity;
     }
 }

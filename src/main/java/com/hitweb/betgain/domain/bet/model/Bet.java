@@ -12,6 +12,7 @@ public class Bet {
     private BetState betState;
     private Odd odd;
     private Client user;
+    private CommunityBet communityBet;
 
     public long getId() {
         return id;
@@ -59,5 +60,13 @@ public class Bet {
 
     public void setUser(Client user) {
         this.user = user;
+    }
+
+    public CommunityBet getCommunityBet() {
+        return communityBet;
+    }
+
+    public void setCommunityBet(CommunityBet communityBet) {
+        this.communityBet = communityBet;
     }
 }

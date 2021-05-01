@@ -2,12 +2,11 @@ package com.hitweb.betgain.domain.bet.usecases;
 
 import com.hitweb.betgain.domain.bet.model.Bet;
 import com.hitweb.betgain.domain.bet.model.BetState;
+import com.hitweb.betgain.domain.bet.model.CommunityBet;
 import com.hitweb.betgain.domain.bet.model.EBetState;
-import com.hitweb.betgain.domain.bet.ports.BetRepository;
-import com.hitweb.betgain.domain.bet.ports.BetStateRepository;
-import com.hitweb.betgain.domain.bet.ports.OddRepository;
-import com.hitweb.betgain.domain.bet.ports.OddTypeRepository;
+import com.hitweb.betgain.domain.bet.ports.*;
 import com.hitweb.betgain.domain.bet.service.payload.request.BetRequest;
+import com.hitweb.betgain.domain.bet.service.payload.request.CommunityBetRequest;
 import com.hitweb.betgain.domain.bet.service.payload.response.BetResponse;
 import com.hitweb.betgain.domain.bet.service.payload.response.EBetResponseCode;
 import com.hitweb.betgain.domain.user.model.Client;
@@ -21,13 +20,15 @@ public class BetUseCase {
     private final OddTypeRepository oddTypeRepository;
     private final OddRepository oddRepository;
     private final UserRepository userRepository;
+    private final CommunityBetRepository communityBetRepository;
 
-    public BetUseCase(BetRepository betRepository, BetStateRepository betStateRepository, OddTypeRepository oddTypeRepository, OddRepository oddRepository, UserRepository userRepository) {
+    public BetUseCase(BetRepository betRepository, BetStateRepository betStateRepository, OddTypeRepository oddTypeRepository, OddRepository oddRepository, UserRepository userRepository, CommunityBetRepository communityBetRepository) {
         this.betRepository = betRepository;
         this.betStateRepository = betStateRepository;
         this.oddTypeRepository = oddTypeRepository;
         this.oddRepository = oddRepository;
         this.userRepository = userRepository;
+        this.communityBetRepository = communityBetRepository;
     }
 
     public BetResponse bet(BetRequest betRequest) {
@@ -51,6 +52,8 @@ public class BetUseCase {
             return betResponse;
         }
 
+
+
         BetState betState = betStateRepository.findBetStateByCode(EBetState.ISSUED);
 
         Bet bet = new Bet();
@@ -59,6 +62,14 @@ public class BetUseCase {
         bet.setBetState(betState);
         bet.setOdd(betRequest.getOdd());
         bet.setUser(client);
+
+        if(betRequest instanceof CommunityBetRequest){
+            //traitement community bet ici
+            CommunityBet communityBet = new CommunityBet(0, ((CommunityBetRequest) betRequest).getTreshold());
+            CommunityBet communityBetSaved = communityBetRepository.save(communityBet);
+            bet.setCommunityBet(communityBetSaved);
+        }
+
 
         Bet betSaved = betRepository.save(bet);
         betResponse.setBet(betSaved);

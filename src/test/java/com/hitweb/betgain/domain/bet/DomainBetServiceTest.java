@@ -1,10 +1,7 @@
 package com.hitweb.betgain.domain.bet;
 
 import com.hitweb.betgain.domain.bet.model.*;
-import com.hitweb.betgain.domain.bet.ports.BetRepository;
-import com.hitweb.betgain.domain.bet.ports.BetStateRepository;
-import com.hitweb.betgain.domain.bet.ports.OddRepository;
-import com.hitweb.betgain.domain.bet.ports.OddTypeRepository;
+import com.hitweb.betgain.domain.bet.ports.*;
 import com.hitweb.betgain.domain.bet.service.payload.request.BetRequest;
 import com.hitweb.betgain.domain.bet.service.payload.response.BetResponse;
 import com.hitweb.betgain.domain.bet.service.payload.response.EBetResponseCode;
@@ -39,7 +36,8 @@ public class DomainBetServiceTest {
     OddTypeRepository oddTypeRepository;
     @MockBean
     UserRepository userRepository;
-
+    @MockBean
+    CommunityBetRepository communityBetRepository;
     @Test
     public void testBet() {
 
@@ -75,7 +73,7 @@ public class DomainBetServiceTest {
 
         Mockito.when(betRepository.save(any())).thenReturn(bet);
 
-        BetResponse betResponse = new BetUseCase(betRepository, betStateRepository, oddTypeRepository, oddRepository, userRepository).bet(betRequest);
+        BetResponse betResponse = new BetUseCase(betRepository, betStateRepository, oddTypeRepository, oddRepository, userRepository, communityBetRepository).bet(betRequest);
         assertEquals(EBetResponseCode.SUCCESS, betResponse.getResponseCode());
     }
 }

@@ -24,7 +24,6 @@ public class TreatMatchResultsUseCase {
     //je veux que les côtes soient validés ou non
 
     //afin de mettre à jour le statut des paris qui ont été joués (réussi, paerdu ...)
-    
     private final MatchRepository matchRepository;
     private final OpponentRepository opponentRepository;
     private final OddRepository oddRepository;
