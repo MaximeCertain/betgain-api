@@ -1,0 +1,104 @@
+# OpenAPI 3 has quite a difference with OpenAPI 2, the way the linter works in the editor will be based on this.
+openapi: 3.0.0
+
+# This section will contain metadata information about the API. It will be shown on the editor/UI when we publish this
+info:
+  title: Bet & Gain API Back-End
+  version: 1.0.0
+  description: API gérant la logique métier de l'application bet & gain à destination des applications clientes.
+
+# The list of the servers that we can use to use the API. This will be rendered as a combo box in the editor/UI when we publish it, so the user could pick and use the endpoint they prefer.
+servers:
+  - url: http://localhost:11111
+    description: DEV-ENV
+
+paths:
+  /projects: # the API path in which the operation will be performed. When this endpoint triggered, the operation meant to be executed.
+    get: # the HTTP method
+      parameters:
+        - in: query
+          description: find project by name
+          name: name
+          schema:
+            type: string
+      operationId: searchProjects # optional unique string used to identify an operation. When the code generated, this will be the method name.
+      tags:
+        - Projects # group operations logically by resources or any other qualifier. In the context of spring code generation, tags is going to be the class name.
+      description: retrieve all available projects in paginated way
+      responses:
+        200:
+          description: successfully retrieved all projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectResponse'
+  /api/competitions/matchs:
+    get:
+      operationId: getMatchs
+      tags:
+        - Projects
+      description: get all matchs
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+  /api/account/validate/{id}:
+    post:
+      operationId: validate
+      tags:
+        - Projects
+      description: validate user account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountValidation'
+
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+  /api/bets/communityBet/{id}/follow/{userId}}:
+    post:
+      operationId: folllowCommunityBet
+      tags:
+        - Projects
+      description: follow a other community bet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommunityBet'
+
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+
+components:
+  schemas:
+    AccountValidation:
+      type: object
+      properties:
+        confirmationCode:
+          type: string
+          description: validation code sended by mail
+          example: "AMEbiYeBJk"
+    CommunityBet:
+      type: object
+      properties:
+        treshold:
+          type: int
+          description: seuil de participation auquel la côte va être boostée
+          example: 150

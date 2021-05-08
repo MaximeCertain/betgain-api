@@ -5,4 +5,5 @@ import com.hitweb.betgain.domain.bet.model.CommunityBet;
 
 public interface CommunityBetRepository {
     CommunityBet save(CommunityBet communityBet);
+    <Optional> CommunityBet findById(long id);
 }

@@ -5,6 +5,7 @@ import com.hitweb.betgain.domain.bet.model.BetState;
 import com.hitweb.betgain.domain.bet.model.CommunityBet;
 import com.hitweb.betgain.domain.bet.model.EBetState;
 import com.hitweb.betgain.domain.bet.ports.*;
+import com.hitweb.betgain.domain.bet.service.payload.request.AddBetOnCommunityBetRequest;
 import com.hitweb.betgain.domain.bet.service.payload.request.BetRequest;
 import com.hitweb.betgain.domain.bet.service.payload.request.CommunityBetRequest;
 import com.hitweb.betgain.domain.bet.service.payload.response.BetResponse;
@@ -52,8 +53,6 @@ public class BetUseCase {
             return betResponse;
         }
 
-
-
         BetState betState = betStateRepository.findBetStateByCode(EBetState.ISSUED);
 
         Bet bet = new Bet();
@@ -70,6 +69,10 @@ public class BetUseCase {
             bet.setCommunityBet(communityBetSaved);
         }
 
+        if(betRequest instanceof AddBetOnCommunityBetRequest){
+            CommunityBet communityBet = communityBetRepository.findById(((AddBetOnCommunityBetRequest) betRequest).getCommunityBetId());
+            bet.setCommunityBet(communityBet);
+        }
 
         Bet betSaved = betRepository.save(bet);
         betResponse.setBet(betSaved);

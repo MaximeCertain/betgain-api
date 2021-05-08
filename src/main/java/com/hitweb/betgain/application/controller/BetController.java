@@ -1,6 +1,7 @@
 package com.hitweb.betgain.application.controller;
 
 import com.hitweb.betgain.domain.bet.service.BetService;
+import com.hitweb.betgain.domain.bet.service.payload.request.AddBetOnCommunityBetRequest;
 import com.hitweb.betgain.domain.bet.service.payload.request.BetRequest;
 import com.hitweb.betgain.domain.bet.service.payload.request.CommunityBetRequest;
 import com.hitweb.betgain.domain.bet.service.payload.request.ListBetRequest;
@@ -42,10 +43,12 @@ public class BetController {
         return betService.bet(betRequest);
     }
 
-  /*  @PostMapping("{id}")
-    public BetResponse addBetOnCommnunityBet(@PathVariable("id") int id, @Valid @RequestBody BetRequest betRequest) {
-        betRequest.setUserId(id);
+    @PostMapping("communityBet/{id}/follow/{userId}")
+    public BetResponse addBetOnCommnunityBet(@PathVariable("id") int id, @PathVariable("userId") int userId,
+                                             @Valid @RequestBody AddBetOnCommunityBetRequest betRequest) {
+        betRequest.setUserId(userId);
+        betRequest.setCommunityBetId(id);
         betRequest.setLoggedClient(WebSecurityConfig.getUser());
         return betService.bet(betRequest);
-    }*/
+    }
 }
