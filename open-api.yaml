@@ -13,32 +13,12 @@ servers:
     description: DEV-ENV
 
 paths:
-  /projects: # the API path in which the operation will be performed. When this endpoint triggered, the operation meant to be executed.
-    get: # the HTTP method
-      parameters:
-        - in: query
-          description: find project by name
-          name: name
-          schema:
-            type: string
-      operationId: searchProjects # optional unique string used to identify an operation. When the code generated, this will be the method name.
-      tags:
-        - Projects # group operations logically by resources or any other qualifier. In the context of spring code generation, tags is going to be the class name.
-      description: retrieve all available projects in paginated way
-      responses:
-        200:
-          description: successfully retrieved all projects
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ProjectResponse'
+  /api/competitions/: # the API path in which the operation will be performed. When this endpoint triggered, the operation meant to be executed.
   /api/competitions/matchs:
     get:
       operationId: getMatchs
       tags:
-        - Projects
+        - Matchs
       description: get all matchs
       responses:
         200:
@@ -46,18 +26,195 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectResponse'
-  /api/account/validate/{id}:
+                $ref: '#/components/schemas/MatchResponse'
+  /api/competitions/matchs/{code}/results:
+    post:
+      operationId: postResultsForMatch
+      tags:
+        - Matchs
+      description: postResultsForMatch since API SCRAPPING
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+  /api/users:
+    post:
+      operationId: addUser
+      tags:
+        - Users
+      description: add user
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+    get:
+      operationId: getUsers
+      tags:
+        - Users
+      description: get all user
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+  /api/users/{id}:
+    put:
+      operationId: editUser
+      tags:
+        - Users
+      description: edit user
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+  /api/auth/signin:
     post:
       operationId: validate
       tags:
-        - Projects
+        - Account
       description: validate user account
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AccountValidation'
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+  /api/auth/signup:
+    post:
+      operationId: validate
+      tags:
+        - Account
+      description: validate user account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountValidation'
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+  /api/account/validate/{id}:
+    post:
+      operationId: validate
+      tags:
+        - Account
+      description: validate user account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountValidation'
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+  /api/profile/edit/{id}:
+    put:
+      operationId: validate
+      tags:
+        - Account
+      description: validate user account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountValidation'
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+  /api/profile/deposit/{id}:
+    post:
+      operationId: validate
+      tags:
+        - Account
+      description: validate user account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountValidation'
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+  /api/profile/withdraw/{id}:
+    post:
+      operationId: validate
+      tags:
+        - Account
+      description: validate user account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountValidation'
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+  /api/profile/moneyflows/{id}:
+    get:
+      operationId: validate
+      tags:
+        - Account
+      description: validate user account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountValidation'
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+  /api/bets/communityBet/{id}:
+    post:
+      operationId: createCommunityBet
+      tags:
+        - Bets
+      description: create a community bet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommunityBet'
 
       responses:
         200:
@@ -65,12 +222,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectResponse'
-  /api/bets/communityBet/{id}/follow/{userId}}:
+                $ref: '#/components/schemas/MatchResponse'
+  /api/bets/communityBet/{id}/follow/{userId}:
     post:
       operationId: folllowCommunityBet
       tags:
-        - Projects
+        - Bets
       description: follow a other community bet
       requestBody:
         content:
@@ -84,10 +241,51 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectResponse'
+                $ref: '#/components/schemas/MatchResponse'
+  /api/bets/{userId}:
+    post:
+      operationId: add bet
+      tags:
+        - Bets
+      description: add bet on odd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommunityBet'
+
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
+  /api/bets/history/{userId}:
+    post:
+      operationId: history for users bets
+      tags:
+        - Bets
+      description: add bet on odd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommunityBet'
+
+      responses:
+        200:
+          description: the specific project successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchResponse'
 
 components:
   schemas:
+    MatchResponse:
+      type: object
+
     AccountValidation:
       type: object
       properties:
